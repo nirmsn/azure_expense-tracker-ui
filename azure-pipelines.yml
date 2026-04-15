@@ -13,7 +13,7 @@ variables:
   containerAppName: expense
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: Default
 
 steps:
 
