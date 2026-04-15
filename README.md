@@ -2,7 +2,7 @@
 
 Full-stack expense tracking app — React UI + Python Flask API + MySQL.
 
-## Repo structure
+## Repo structure ###
 
 ```
 .
