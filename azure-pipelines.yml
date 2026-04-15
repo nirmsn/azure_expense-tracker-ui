@@ -1,0 +1,38 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- dev
+
+variables:
+  acrName: nirmalacr
+  imageName: expense-frontend
+  resourceGroup: rg-nirmal-dev
+  containerAppName: expense
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+
+- task: Docker@2
+  inputs:
+    containerRegistry: 'acr-service-connection'
+    repository: $(imageName)
+    command: 'buildAndPush'
+    Dockerfile: 'frontend/Dockerfile'
+    tags: |
+      $(Build.BuildId)
+
+- task: AzureCli@2
+  inputs:
+    azureSubscription: 'azure-service-connection'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      az containerapp update \
+      --name $(containerAppName) \
+      --resource-group $(resourceGroup)
+      --image $(acrName).azurecr.io/$(imageName):$(Build.BuildId)
