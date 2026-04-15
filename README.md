@@ -1,6 +1,6 @@
 # Expense Tracker
 
-Full-stack expense tracking app — React UI + Python Flask API + MySQL just
+Full-stack expense tracking app — React UI + Python Flask API + MySQL just-1
 
 ## Repo structure ###
 
