@@ -26,13 +26,13 @@ steps:
     tags: |
       $(Build.BuildId)
 
-- task: AzureCli@2
+- task: AzureCLI@2
   inputs:
     azureSubscription: 'azure-service-connection'
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
       az containerapp update \
-      --name $(containerAppName) \
-      --resource-group $(resourceGroup)
-      --image $(acrName).azurecr.io/$(imageName):$(Build.BuildId)
+        --name $(containerAppName) \
+        --resource-group $(resourceGroup) \
+        --image $(acrName).azurecr.io/$(imageName):$(Build.BuildId)
